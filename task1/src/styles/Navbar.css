@@ -1,0 +1,122 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--bg-color);
+  transition: var(--transition);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+  background-color: var(--bg-color);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.logo:hover {
+  color: var(--secondary-color);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: var(--transition);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-color);
+  transition: var(--transition);
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-color);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .mobile-menu-btn.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .mobile-menu-btn.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-btn.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+} 
