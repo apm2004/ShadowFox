@@ -37,28 +37,30 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
     color: #6196c5;
+    margin-right: auto;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
+    margin-left: auto;
+    gap: 2rem;
 }
 
 .nav-links li {
-    margin-left: 2rem;
+    margin: 0;
 }
 
 .nav-links a {
     text-decoration: none;
     color: #6196c5;
     font-weight: 500;
-    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
 }
 
 .nav-links a:hover {
     transform: translateY(-2px);
-    text-shadow: 0 2px 4px rgba(96, 150, 197, 0.5);
 }
 
 /* Hero Section */
@@ -383,6 +385,21 @@ footer {
 .affiliation-card:hover {
     transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
     box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+.affiliation-card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1.5rem;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.affiliation-card:hover img {
+    transform: translateY(-10px) scale(1.2);
 }
 
 .affiliation-card i {
