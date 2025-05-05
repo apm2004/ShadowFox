@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - ShadowFox</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="success-animation">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h1>Thank You for Your Order!</h1>
+        <p>Your order has been successfully placed.</p>
+        <div class="order-details">
+            <h2>Order Details</h2>
+            <div id="confirmation-items"></div>
+            <div class="confirmation-total">
+                <strong>Total Paid:</strong>
+                <span id="confirmation-amount"></span>
+            </div>
+        </div>
+        <div class="next-steps">
+            <h3>What's Next?</h3>
+            <p>You will receive an email confirmation shortly with your order details.</p>
+            <p>Your order number is: <strong id="order-number"></strong></p>
+        </div>
+        <div class="confirmation-actions">
+            <a href="index.html" class="btn secondary">Continue Shopping</a>
+            <button onclick="window.print()" class="btn primary">Print Receipt</button>
+        </div>
+    </div>
+
+    <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Generate order number
+            const orderNumber = 'ORD-' + Date.now().toString().slice(-6);
+            document.getElementById('order-number').textContent = orderNumber;
+
+            // Display order total
+            const orderTotal = localStorage.getItem('lastOrderTotal');
+            if (orderTotal) {
+                document.getElementById('confirmation-amount').textContent = orderTotal;
+            }
+
+            // Clear the last order total from storage
+            localStorage.removeItem('lastOrderTotal');
+        });
+    </script>
+</body>
+</html>

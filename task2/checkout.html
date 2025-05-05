@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ShadowFox</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="checkout-container">
+        <div class="checkout-main">
+            <div class="checkout-steps">
+                <div class="steps-header">
+                    <h2>Checkout</h2>
+                    <div class="steps-progress">
+                        <div class="step active">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Shipping</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Payment</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Review</div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="checkoutForm" class="checkout-form active">
+                    <div class="form-section">
+                        <h3>Shipping Information</h3>
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Street Address</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" name="state" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">ZIP Code</label>
+                                <input type="text" id="zip" name="zip" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Shipping Method</h3>
+                        <div class="shipping-methods">
+                            <label class="shipping-method">
+                                <input type="radio" name="shipping" value="standard" checked>
+                                <div class="method-content">
+                                    <div class="method-info">
+                                        <span class="method-name">Standard Shipping</span>
+                                        <span class="method-duration">3-5 business days</span>
+                                    </div>
+                                    <span class="method-price">Free</span>
+                                </div>
+                            </label>
+                            <label class="shipping-method">
+                                <input type="radio" name="shipping" value="express">
+                                <div class="method-content">
+                                    <div class="method-info">
+                                        <span class="method-name">Express Shipping</span>
+                                        <span class="method-duration">1-2 business days</span>
+                                    </div>
+                                    <span class="method-price">$9.99</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary" onclick="window.location.href='index.html'">
+                            <i class="fas fa-arrow-left"></i> Back to Cart
+                        </button>
+                        <button type="button" class="btn primary" onclick="proceedToPayment()">
+                            Continue to Payment <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <form id="paymentForm" class="checkout-form">
+                    <div class="form-section">
+                        <h3>Payment Information</h3>
+                        <div class="payment-methods">
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="credit" checked>
+                                <div class="method-content">
+                                    <i class="fab fa-cc-visa"></i>
+                                    <span>Credit Card</span>
+                                </div>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="paypal">
+                                <div class="method-content">
+                                    <i class="fab fa-paypal"></i>
+                                    <span>PayPal</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="credit-card-form">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiry">Expiry Date</label>
+                                    <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardName">Name on Card</label>
+                                <input type="text" id="cardName" name="cardName" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary" onclick="backToShipping()">
+                            <i class="fas fa-arrow-left"></i> Back to Shipping
+                        </button>
+                        <button type="button" class="btn primary" onclick="proceedToReview()">
+                            Continue to Review <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="reviewForm" class="checkout-form">
+                    <div class="form-section">
+                        <h3>Order Review</h3>
+                        <div class="order-summary">
+                            <div class="order-items" id="orderItems">
+                                <!-- Order items will be dynamically inserted here -->
+                            </div>
+                            <div class="order-totals">
+                                <div class="total-row">
+                                    <span>Subtotal</span>
+                                    <span id="subtotal">$0.00</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>Shipping</span>
+                                    <span id="shipping">$0.00</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>Tax</span>
+                                    <span id="tax">$0.00</span>
+                                </div>
+                                <div class="total-row total">
+                                    <span>Total</span>
+                                    <span id="total">$0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Shipping Details</h3>
+                        <div class="shipping-details" id="shippingDetails">
+                            <!-- Shipping details will be dynamically inserted here -->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary" onclick="backToPayment()">
+                            <i class="fas fa-arrow-left"></i> Back to Payment
+                        </button>
+                        <button type="button" class="btn primary" onclick="completePurchase()">
+                            Place Order <i class="fas fa-lock"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-sidebar">
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div class="order-items" id="sidebarOrderItems">
+                    <!-- Order items will be dynamically inserted here -->
+                </div>
+                <div class="order-totals">
+                    <div class="total-row">
+                        <span>Subtotal</span>
+                        <span id="sidebarSubtotal">$0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Shipping</span>
+                        <span id="sidebarShipping">$0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Tax</span>
+                        <span id="sidebarTax">$0.00</span>
+                    </div>
+                    <div class="total-row total">
+                        <span>Total</span>
+                        <span id="sidebarTotal">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="security-notice">
+                <i class="fas fa-lock"></i>
+                <p>Your payment information is secure and encrypted</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/notifications.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/checkout-init.js"></script>
+</body>
+</html> 
